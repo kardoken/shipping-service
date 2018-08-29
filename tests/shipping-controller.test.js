@@ -1,6 +1,7 @@
 var chai = require('chai')
 var expect = chai.expect
 var ShippingController = require('../src/controllers/shipping-controller')
+var sinon = require('sinon');
 
 describe('Shipping controller', function () {
   var shippingCtrl = new ShippingController()

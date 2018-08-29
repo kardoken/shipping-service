@@ -1,11 +1,30 @@
-var productService = require('../services/product-service')
-function ShippingController() {}
+// tests/shipping-controller.test.js
+var chai = require('chai')
+var expect = chai.expect
+var sinon = require('sinon')
+var ShippingController = require('../src/controllers/shipping-controller')
+var productService = require('../src/services/product-service')
 
-const REGULAR_PRICE = 0.1, OVERNIGHT_PRICE = 1
+describe('Shipping controller', function () {
+  var shippingCtrl = new ShippingController()
 
-ShippingController.prototype.getItemShipping = async function(item) {
-  var shippingAmount = await productService.getProductWeight(item.id)
-  return shippingAmount * REGULAR_PRICE
-}
+  beforeEach(function(){
+    sinon.stub(productService, 'getProductWeight').callsFake(async function() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+          resolve(5)
+        }, 50)
+      })
+    })
+  })
 
-module.exports = ShippingController;
+  afterEach(function () {
+    productService.getProductWeight.restore()
+  })
+
+  it('Should calculate correct shipping ', async function () {
+    let shipping = await shippingCtrl.getItemShipping({ id: 1, type: 'standard' })
+    expect(shipping).to.equal(0.5)
+  })
+
+})
