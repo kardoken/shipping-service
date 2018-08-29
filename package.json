@@ -19,6 +19,7 @@
   "homepage": "https://github.com/kardoken/shipping-service#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "express": "^4.16.3",
     "mocha": "^5.2.0",
     "tests": "^0.4.2"
   },
