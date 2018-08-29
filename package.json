@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kardoken/shipping-service#readme",
   "dependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "tests": "^0.4.2"
   }
 }
